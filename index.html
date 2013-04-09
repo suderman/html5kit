@@ -18,10 +18,25 @@
 <meta http-equiv=x-ua-compatible content="ie=edge,chrome=1">
 <meta name=viewport content="width=device-width, initial-scale=1.0">
 
-<!-- Styles & Scripts -->
-<link href=styles/style.css rel=stylesheet>
+<!-- Stylin' styles 
+     On production, replace the LESS with the compiled CSS file! -->
+<link href=styles/style.less rel=stylesheet/less>
+<!-- <link href=styles/style.css rel=stylesheet> -->
+
+<!-- Modernizr, HTML5shiv, yepnope
+     On production, prepend this to the compiled script.coffee file! -->
 <script src=scripts/lib.js></script>
-<script src=scripts/script.js></script>
+
+<!-- Scriptin' scripts
+     On production, replace the CoffeeScript with the compiled JS file! -->
+<script src=scripts/script.coffee type=text/coffeescript></script>
+<!-- <script src=scripts/script.js></script> -->
+
+<!-- Compile less and coffee in client! 
+     Tip: append #!watch to URL to see live CSS changes!
+     On production, remove these libraries. -->
+<script src=scripts/dev/less.js></script>
+<script src=scripts/dev/coffee-script.js></script>
 
 <!-- And so it begins... -->
 <body>

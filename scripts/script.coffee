@@ -24,10 +24,10 @@ yepnope test: Modernizr.ie <= 7, yep: 'styles/ie.css'
 
 # Gentlemen, load your libraries
 yepnope load: [
-  'scripts/jquery.js'         # obviously
-  'scripts/underscore.js'     # tasty utility methods
-  'scripts/fastclick.js'      # treat tap as click events
-  'scripts/H5F.js'            # HTML5 forms polyfill
+  'scripts/lib/jquery.js'         # obviously
+  'scripts/lib/underscore.js'     # tasty utility methods
+  'scripts/lib/fastclick.js'      # treat tap as click events
+  'scripts/lib/H5F.js'            # HTML5 forms polyfill
 ], complete: -> jQuery app.init()
 
 # Google Analytics
