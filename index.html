@@ -27,32 +27,46 @@
 <body>
 
 <header role=banner>
-  <h1>html5kit</h1>
-  <p>Placeholder website FTW!
-  <ul>
-    <li class=icon-cog>One
-    <li class=icon-cloud>Two
-    <li class=icon-home>Three
-  </ul>
+  <div class=container>
+    <h1><a href=#>html5kit</a></h1>
+    <a href=# class=menu></a>
+    <nav role=navigation>
+      <ul>
+        <li><a href=#one class=icon-cog>One</a>
+        <li><a href=#two class=icon-cloud>Two</a>
+        <li><a href=#three class=icon-home>Three</a>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<nav role=navigation>
-  <h1><a href=#>html5kit</a></h1>
-  <ul>
-    <li><a href=#>Home</a>
-    <li><a href=#>About</a>
-    <li><a href=#>Contact</a>
-    <li><a href=#>Stuff</a>
-  </ul>
-</nav>
+<div role=main>
 
-<section>
-  <article>
-    <p class=one>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in voluptate sit, qui epuletur, in dolore, qui torqueatur. Uterque enim summo bono fruitur, id est voluptate. Duo Reges: constructio interrete. 
-    <p class=two>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in voluptate sit, qui epuletur, in dolore, qui torqueatur. Uterque enim summo bono fruitur, id est voluptate. Duo Reges: constructio interrete. 
-    <p class=three>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in voluptate sit, qui epuletur, in dolore, qui torqueatur. Uterque enim summo bono fruitur, id est voluptate. Duo Reges: constructio interrete. 
-  </article>
-</section>
+  <div class=logo>
+    <header>
+      <figure></figure>
+    </header>
+  </div>
+
+  <section id=one>
+    <div class=container>
+      <p class=one>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in voluptate sit, qui epuletur, in dolore, qui torqueatur. Uterque enim summo bono fruitur, id est voluptate. Duo Reges: constructio interrete. 
+      <p class=two>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in voluptate sit, qui epuletur, in dolore, qui torqueatur. Uterque enim summo bono fruitur, id est voluptate. Duo Reges: constructio interrete. 
+      <p class=three>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in voluptate sit, qui epuletur, in dolore, qui torqueatur. Uterque enim summo bono fruitur, id est voluptate. Duo Reges: constructio interrete. 
+    </div>
+  </section>
+</div>
+
+<footer role=contentinfo>
+  <div class=container>
+    <nav>
+      <a href="#">Sitemap</a> / <a href="#">Contact Information</a>
+    </nav>
+    <div class=credits>  
+      © 2013 duct-taped together by jon suderman
+    </div>
+  </div>
+</footer>
