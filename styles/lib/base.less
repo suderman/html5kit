@@ -1,0 +1,178 @@
+/*!
+// [base.less]
+// Styles and mixins collected by Jon Suderman 2013
+// --> another highly recommended mixin library: https://github.com/CSSHat/LESSHat
+//
+//                                   ,.=,,==. ,,_
+//                  _ ,====, _    |I|`` ||  `|I `|
+//                 |`I|    || `==,|``   ^^   ``  |
+//                 | ``    ^^    ||_,===TT`==,,_ |
+//                 |,==Y``Y==,,__| \L=_-`'   +J/`
+//                  \|=_  ' -=#J/..-|=_-     =|
+//                   |=_   -;-='`. .|=_-     =|----T--,
+//                   |=/\  -|=_-. . |=_-/^\  =||-|-|::|____
+//                   |=||  -|=_-. . |=_-| |  =|-|-||::\____
+//                   |=LJ  -|=_-. . |=_-|_| =||-|-|:::::::
+//                   |=_   -|=_-_.  |=_-     =|-|-||:::::::
+//                   |=_   -|=//^\. |=_-     =||-|-|:::::::
+//               ,   |/&_,_-|=||  | |=_-     =|-|-||:::::::
+//            ,--``8%,/    ',%||  | |=_-     =||-|-|%::::::
+//        ,---`_,888`  ,.'''''`-.,|,|/!,--,.&\|&\-,|&#:::::
+//       |;:;K`__,...;=\_____,=``           %%%&     %#,---
+////////////////////////////////////////////////////////////////////////
+*/
+
+// Web Fonts
+// example: .font('FontAwesome', "/fonts/font-awesome/fontawesome-webfont");
+.font(@fontname, @fontfile) {
+  @font-face {
+    font-family: "@{fontname}";
+    src: url("@{fontfile}.eot");
+    src: url("@{fontfile}.eot?#iefix") format("embedded-opentype"),
+         url("@{fontfile}.woff") format("woff"),
+         url("@{fontfile}.ttf") format("truetype"),
+         url("@{fontfile}.svg#@{fontname}") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+// Set font size in pixels, get rem instead!
+.font-size(@font-size: 16) {
+  @rem: (unit(@font-size) / 10);
+  font-size : (unit(@font-size) * 1px);
+  font-size : ~"@{rem}rem"; 
+}
+
+// Cross-browser opacity (including IE)
+.opacity(@opacity: 0.5) {
+  -webkit-opacity: @opacity;
+  -moz-opacity: @opacity;
+  opacity: @opacity;
+  @opperc: (@opacity * 100);
+  -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+  filter: ~"alpha(opacity=@{opperc})";
+}
+
+// Common styles used on :before/:after pseudo elements
+.pseudo-layer(@zIndex: -1, @content: '') {
+  position: absolute;
+  z-index: @zIndex;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: @content;
+}
+
+// Contain floats
+.clearfix {
+  &:before, &:after {
+    display: table;
+    content: ""; 
+  }
+  &:after { clear: both; } 
+}
+
+// For image replacement
+.hide-text() {
+  text-indent : 100%;
+  white-space : nowrap;
+  overflow : hidden; 
+}
+
+// Icon font
+// example: .icon(fontawesome, "\f08e", after);
+.icon(@fontFamily, @fontCharacter, @beforeOrAfter: before) {
+  @pseudoSelector: ~":@{beforeOrAfter}";
+  &@{pseudoSelector} { 
+    font-family: @fontFamily;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    content: @fontCharacter; 
+  }
+}
+
+// Text-selection colors
+.selection(@background, @color: #000, @img-background: transparent) {
+  ::selection {
+    background: @background;
+    color: @color;
+  }
+  ::-moz-selection {
+    background: @background;
+    color: @color;
+  }
+  img::selection {
+    background: @img-background;
+  }
+  img::-moz-selection {
+    background: @img-background;
+  }
+}
+
+// Greyscale
+@black: rgb(0,0,0);
+@darkgrey: lighten(@black, 25%);
+@grey: lighten(@black, 50%);
+@lightgrey: lighten(@black, 75%);
+@lightergrey: lighten(@black, 90%);
+@white: rgb(255,255,255);
+@transparent: rgba(0,0,0,0);
+
+// Common media queries sizes
+// example: @media @480 { ... }
+@480: ~"only screen and (min-width: 480px)";
+@600: ~"only screen and (min-width: 600px)";
+@768: ~"only screen and (min-width: 768px)";
+@992: ~"only screen and (min-width: 992px)";
+@1382: ~"only screen and (min-width: 1382px)";
+
+// Retina media query
+// example: @media @2x { ... }
+@2x: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5)";
+
+// Viewport settings now also go in the CSS
+@-webkit-viewport { width: device-width; }
+@-moz-viewport { width: device-width; }
+@-ms-viewport { width: device-width; }
+@-o-viewport { width: device-width; }
+@viewport { width: device-width; }
+
+// Use a sensible box model
+*, *:after, *:before { 
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
+// Make html and body behave
+html {
+  background: @white;
+  font-size: 62.5%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch; 
+  -webkit-tap-highlight-color: lighten(@black, 75%); 
+  -webkit-text-size-adjust: 100%; 
+  -ms-text-size-adjust: 100%; 
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  width: 100%;
+  min-height: 100%;
+  color: @black;
+  background-color: transparent;
+  font-family: sans-serif;
+  line-height: 1.5em;
+  .font-size(16);
+}
+
+// Fluid images
+img { max-width: 100%; }

@@ -1,0 +1,338 @@
+/*!
+    88                                    88 8888888888  88        88
+    88           ,d                       88 88          88        ""   ,d
+    88           88                       88 88  ____    88             88
+    88,dPPYba, MM88MMM 88,dPYba,,adPYba,  88 88a8PPPP8b, 88   ,d8  88 MM88MMM
+    88P'    "8a  88    88P'   "88"    "8a 88 PP"     `8b 88 ,a8"   88   88
+    88       88  88    88      88      88 88          d8 8888[     88   88
+    88       88  88,   88      88      88 88 Y8a     a8P 88`"Yba,  88   88,
+    88       88  "Y888 88      88      88 88  "Y88888P"  88   `Y8a 88   "Y888
+*/
+@import "lib/normalize.less";
+@import "lib/lesshat";
+@import "lib/base";
+
+// Set @fonts, @images
+@fonts: "../fonts";
+@images: "../images";
+
+// Fonts and Icons
+.font('FontAwesome', "@{fonts}/fontawesome-webfont");
+
+// Colors
+@base: rgb(255, 240, 219);
+@pink: rgb(172, 78, 190);
+@brown: rgb(123, 78, 47);
+@green: rgb(92, 191, 120);
+@blue: rgb(34, 74, 109);
+
+html { }
+body { 
+  font-family: serif;
+  .selection(darken(@base, 50%), @base);
+  overflow-x: hidden;
+  .font-size(18);
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  padding: 0 15px; 
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+h1 { 
+  .font-size(20); 
+}
+
+h2 { 
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  padding: .5em 80px;
+  font-family: sans-serif;
+  .font-size(30); 
+  color: @pink;
+  line-height: 1em;
+  text-shadow: 3px 2px 2px fade(@black, 70%);
+  text-align: center;
+  span, b { 
+    display: table-cell; 
+    width: 33%;
+    height: 60px;
+    vertical-align: middle;
+    .transition(width 1s);
+  }
+  b:first-child {
+    background: url("@{images}/blank.gif") no-repeat 100% 50%;
+    .background-size(100% 100%);
+  }
+  b:last-child {
+    background: url("@{images}/blank.gif") no-repeat 0% 50%;
+    .background-size(100% 100%);
+  }
+
+  // Simplify for IE8
+  .ie8 & {
+    border-bottom: 4px solid @green;
+    span { width: 100%; }
+    b { display: none; }
+  }
+}
+
+h3 {}
+p, dd { 
+  line-height: 1.9; 
+  margin: 0 0 2em;
+}
+a { 
+  color: @blue; 
+  &:hover { color: lighten(@blue, 20%); }
+  &[href^=http] {
+    .icon(fontawesome, "\f08e", after);
+    &:after {
+      padding-left: 5px;
+      text-decoration: none;
+    }
+  }
+}
+
+// Header
+@navHeight: 45px;
+header[role=banner] {
+  // position: fixed;
+  z-index: 50;
+  width: 100%;
+  // background: @black;
+  .box-shadow(0px 10px 20px fade(@black, 50%));
+  .clearfix();
+
+  &:after { 
+    .pseudo-layer();
+    height: @navHeight;
+    background: url("@{images}/blank.gif") scroll repeat 50% 0;
+    .background-size(138px 138px);
+  }
+
+  .container { 
+    position: static;
+    padding: 0; 
+  }
+
+  a { 
+    display: block;
+    outline: 0;
+    color: @white;
+    text-decoration: none;
+  }
+
+  h1 {
+    float: left;
+    width: 50%;
+    margin: 0;
+    text-shadow: 2px 2px 2px @black;
+    a { 
+      padding: 0 10px; 
+      height: @navHeight;
+      line-height: @navHeight;
+    }
+  }
+  a.menu { 
+    display: block;
+    float: right;
+    width: 50%;
+    height: 100%;
+    height: @navHeight;
+    line-height: @navHeight;
+    padding: 0 20px; 
+    text-decoration: none;
+    text-align: right;
+    cursor: pointer;
+    .font-size(25);
+    .icon(fontawesome, "\f0c9");
+  }
+
+  // All Navigation
+  @navColor: lighten(@base, 2%);
+  @navBorderColor: darken(@brown, 5%); 
+  @navBorderSize: 4px;
+  @navArrowSize: 10px;
+  nav[role=navigation] {
+    position: absolute;
+    clear: both;
+    top: (@navHeight + 5px);
+    overflow: visible;
+    width: 50%;
+    height: auto !important;
+    background: @navColor;
+    border: @navBorderSize solid @navBorderColor;
+    .box-shadow(-10px 10px 10px fade(@black, 50%));
+    .border-radius(10px);
+    .transition(opacity 0.2s ease-in 0s);
+
+    .opacity(0);
+    right: -55%;
+    html.menu & { 
+      .opacity(1); 
+      right: 1%;
+    }
+
+    // Nav & arrow
+    &:before, &:after { 
+      content: " ";
+      position: absolute;
+      bottom: 100%;
+      right: 26px;
+      height: 0;
+      width: 0;
+      pointer-events: none;
+      border: solid transparent;
+    }
+    &:before { 
+      border-bottom-color: @navBorderColor;
+      border-width: (@navArrowSize + @navBorderSize + 2px);
+      margin-right: ((@navArrowSize + @navBorderSize + 2px) * -1);
+    }
+    &:after {
+      border-bottom-color: @navColor;
+      border-width: @navArrowSize;
+      margin-right: ((@navArrowSize) * -1);
+    }
+
+    // Nav menu
+    ul {
+      display: block; 
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li { 
+        display: block; 
+        list-style-type: none;
+        a { 
+          display: block;
+          padding: 6px 10%;
+          color: darken(@brown, 5%);
+          text-align: left;
+          text-decoration: none;
+          .font-size(18);
+          font-family: JungleFeverRegular, sans-serif;
+          font-weight: bold;
+          .transition(background 0.1s linear);
+        }
+        &:first-child a { padding-top: 15px; }
+        &:last-child a { padding-bottom: 15px; }
+      }
+    }
+  }
+
+  // Level One
+  nav[role=navigation] > ul > li {
+    white-space: nowrap;
+    > a {
+      border-left-width: 0; 
+      &:hover { 
+        color: @base;
+        background: @pink;
+      }
+      &:before  { padding-right: 5px; }
+      &.schedule { .icon(fontawesome, "\f0f3"); }
+      &.zoo      { .icon(fontawesome, "\f02b"); }
+      &.maps     { .icon(fontawesome, "\f041"); }
+      &.dress    { .icon(fontawesome, "\f000"); }
+      &.registry { .icon(fontawesome, "\f06b"); }
+      &.rsvp     { .icon(fontawesome, "\f0e0"); }
+    }
+    &:first-child > a { border-left-width: 1px; }
+  }
+}
+
+
+// Page content
+div[role=main] {
+  position: relative;
+  padding-top: (@navHeight - 5px);
+  padding-bottom: 100px;
+  background: @base url("@{images}/blank.gif") scroll repeat;
+
+  .container {
+    .clearfix();
+  }
+
+  // Blocks of info
+  section { 
+    padding-top: @navHeight;
+    > div { 
+      position: relative;
+      .clearfix();
+      padding: 1px 10px 20px;
+      border: 3px dashed @transparent; 
+      .border-radius(30px);
+      .transition(border-color 0.5s ease-in 0s);
+    }
+    &:target > div { border-color: @brown; }
+  }
+}
+
+
+
+
+// Footer
+footer[role=contentinfo] {
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+  padding: 10px 0 20px; 
+  overflow: hidden;
+  border-top: 5px solid @black;
+  background: url("@{images}/blank.gif") scroll repeat 50% 0;
+  .credits { 
+    float: right;
+    color: @white;
+    .font-size(20);
+    font-weight: bold;
+    text-shadow: 1px 1px 3px @black, -1px -1px 3px @black;
+  }
+}
+
+
+// Magical media queries
+@media print {
+  @import "lib/print";
+}
+
+// 480px wide
+.480() { 
+  body { background-color: @pink; }
+}
+@media @480 { .480; } .ie { .480; }
+
+// 600px wide
+.600() { 
+  body { background-color: @brown; }
+}
+@media @600 { .600; } .ie { .600; }
+
+// 768px wide
+.768() { 
+  body { background-color: @green; }
+}
+@media @768 { .768; } .ie { .768; }
+
+// 992px wide
+.992() { 
+  body { background-color: @pink; }
+}
+@media @992 { .992; } .ie { .992; }
+
+// 1382px wide
+.1382() { 
+  body { background-color: @base; }
+}
+@media @1382 { .1382; } .ie { .1382; }
+
+// IE7 and below get the universal stylesheet
+.ie7, .ie6 {
+  header[role=banner] { position: relative; }
+  nav[role=navigation] { display: none; }
+}
